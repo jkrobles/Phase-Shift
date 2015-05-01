@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="http://threejs.org/build/three.min.js"></script>
+		<script>
+			var engine = {
+				scene: '',
+				camera: '',
+				renderer: '',
+				init: function() {
+					this.scene = new THREE.Scene();
+		                        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+                		        this.renderer = new THREE.WebGLRenderer();
+                 		       	this.renderer.setSize( window.innerWidth, window.innerHeight );
+                        		document.body.appendChild( this.renderer.domElement );
+				},
+				render: function() {
+					requestAnimationFrame( this.render.bind(engine) );
+					
+	                                this.renderer.render(this.scene, this.camera);
+				},
+				addObject: function(objType,hexColor) {
+
+					switch(objType) {
+						case 'axis':
+							var obj = new THREE.AxisHelper(10);	
+							break;
+						default:
+							var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+                        				var material = new THREE.MeshBasicMaterial( { color: hexColor } );
+							var obj = new THREE.Mesh( geometry, material );
+							break;
+					}
+                        		this.scene.add( obj );
+                        		this.camera.position.z += 5;
+
+				}	
+			};
+			engine.init();
+			engine.addObject('box',0x00ff00);
+			engine.addObject('axis');
+			engine.render();
+		</script>
+	</body>
+</html>
