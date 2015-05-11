@@ -14,8 +14,8 @@ Simple clone this repository into a web accessible directory. Then you may chang
 
 # Contribute
 
-- Issue Tracker: <github.com/jkobles/Phase-Shift/issues>
-- Source Code: <github.com/jkrobles/Phase-Shift>
+- Issue Tracker: github.com/jkobles/Phase-Shift/issues
+- Source Code: github.com/jkrobles/Phase-Shift
 
 # Support
 
