@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>My first Three.js app</title>
+		<title>Webgl Test</title>
 		<style>
 			body { margin: 0; }
 			canvas { width: 100%; height: 100% }
@@ -8,44 +8,41 @@
 	</head>
 	<body>
 		<script src="http://threejs.org/build/three.min.js"></script>
+        <script src="js/orbitcontrols.js"></script>
+        <script src="js/engine.js"></script>
 		<script>
-			var engine = {
-				scene: '',
-				camera: '',
-				renderer: '',
-				init: function() {
-					this.scene = new THREE.Scene();
-		                        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-                		        this.renderer = new THREE.WebGLRenderer();
-                 		       	this.renderer.setSize( window.innerWidth, window.innerHeight );
-                        		document.body.appendChild( this.renderer.domElement );
-				},
-				render: function() {
-					requestAnimationFrame( this.render.bind(engine) );
-					
-	                                this.renderer.render(this.scene, this.camera);
-				},
-				addObject: function(objType,hexColor) {
-
-					switch(objType) {
-						case 'axis':
-							var obj = new THREE.AxisHelper(10);	
-							break;
-						default:
-							var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-                        				var material = new THREE.MeshBasicMaterial( { color: hexColor } );
-							var obj = new THREE.Mesh( geometry, material );
-							break;
-					}
-                        		this.scene.add( obj );
-                        		this.camera.position.z += 5;
-
-				}	
-			};
+            // Setup
 			engine.init();
-			engine.addObject('box',0x00ff00);
-			engine.addObject('axis');
+			var box = engine.addBox(0x00ff00);
+			var axis = engine.addAxis();
+            var boxId = engine.getObjectId(box);
+            engine.setCentralObject(boxId);
+            var person = engine.addPerson();
+            person.pose();
 			engine.render();
+
+            // Add key events
+            engine.addKeyEvent(engine.keys.LEFT_KEY,function(){
+                if ((box.position.x -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
+                    box.position.x -= engine.settings.MOVE_SIZE;
+
+                box.rotate.x = 0;
+                box.rotate.y = 0;
+            });
+            engine.addKeyEvent(engine.keys.RIGHT_KEY,function(){
+                if ((box.position.x +engine.settings.MOVE_SIZE) < engine.settings.HORIZONTAL_LIMIT)
+                    box.position.x += engine.settings.MOVE_SIZE;
+            });
+            engine.addKeyEvent(engine.keys.UP_KEY,function(){
+                if ((box.position.y + engine.settings.MOVE_SIZE) < engine.settings.VERTICAL_LIMIT)
+                    box.position.y += engine.settings.MOVE_SIZE;
+            });
+            engine.addKeyEvent(engine.keys.DOWN_KEY,function(){
+                if ((box.position.y-engine.settings.MOVE_SIZE) >= 0)
+                    box.position.y -= engine.settings.MOVE_SIZE;
+            });
+            engine.initializeKeyEvents();
+
 		</script>
 	</body>
 </html>
