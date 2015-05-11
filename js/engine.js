@@ -39,7 +39,7 @@ var engine = {
     },
     addGround: function() {
         //add ground
-        var grassTex = THREE.ImageUtils.loadTexture('grass.png');
+        var grassTex = THREE.ImageUtils.loadTexture('images/grass.png');
         grassTex.wrapS = THREE.RepeatWrapping;
         grassTex.wrapT = THREE.RepeatWrapping;
         grassTex.repeat.x = 256;
@@ -57,12 +57,12 @@ var engine = {
         //add skymap
 //load sky images
         var urls = [
-            "sky1.png",
-            "sky1.png",
-            "sky1.png",
-            "sky1.png",
-            "sky1.png",
-            "sky1.png",
+            "images/sky1.png",
+            "images/sky1.png",
+            "images/sky1.png",
+            "images/sky1.png",
+            "images/sky1.png",
+            "images/sky1.png",
         ];
         var textureCube = THREE.ImageUtils.loadTextureCube(urls);
         //setup the cube shader
