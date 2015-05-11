@@ -11,4 +11,4 @@ Phase Shift was created to expirment and learn THREE.js and how it could be inte
 # Installation
 Simple clone this repository into a web accessible directory. Then you may change the default settings by editing js/engine.js which has a settings object. 
 
- 
+ This project is made possible by Mousebit Web Solutions, LLC <http:/mousebit.com>
