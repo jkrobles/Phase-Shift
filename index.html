@@ -7,7 +7,8 @@
 		</style>
 	</head>
 	<body>
-		<script src="http://threejs.org/build/three.min.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/bower_components/threejs/build/three.min.js"></script>
         <script src="js/orbitcontrols.js"></script>
         <script src="js/engine.js"></script>
 		<script>
@@ -18,16 +19,12 @@
             var boxId = engine.getObjectId(box);
             engine.setCentralObject(boxId);
             var person = engine.addPerson();
-            person.pose();
 			engine.render();
 
             // Add key events
             engine.addKeyEvent(engine.keys.LEFT_KEY,function(){
                 if ((box.position.x -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
                     box.position.x -= engine.settings.MOVE_SIZE;
-
-                box.rotate.x = 0;
-                box.rotate.y = 0;
             });
             engine.addKeyEvent(engine.keys.RIGHT_KEY,function(){
                 if ((box.position.x +engine.settings.MOVE_SIZE) < engine.settings.HORIZONTAL_LIMIT)

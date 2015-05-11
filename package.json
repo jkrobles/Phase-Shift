@@ -1,0 +1,8 @@
+{
+  "name": "phase-shift",
+  "version": "0.0.1",
+  "respository": "https://github.com/jkrobles/Phase-Shift",
+  "devDependencies": {
+    "bower": "1.2.6"
+  }
+}

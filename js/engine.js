@@ -7,7 +7,8 @@ var engine = {
     settings: {
         'HORIZONTAL_LIMIT': 82,
         'VERTICAL_LIMIT':40,
-        'MOVE_SIZE': 1
+        'MOVE_SIZE': 1,
+        'CAMERA_DISTANCE':50
     },
     centralObject: '',
     keys: {
@@ -16,20 +17,13 @@ var engine = {
         RIGHT_KEY: 39,
         DOWN_KEY: 40
     },
+    /**
+     *
+     */
     init: function() {
         this.scene = new THREE.Scene();
-
         this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-        /*this.controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
-        this.controls.target.set( 0, 0, 0 ); // view direction perpendicular to XY-plane
-        this.controls.noRotate = true;
-        this.controls.noZoom = true; // optional
-        //this.controls.mouseButtons = { PAN: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, ORBIT: THREE.MOUSE.RIGHT }; // swapping left and right buttons
-
-        this.addSky();
-        */
         this.addGround();
-
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( this.renderer.domElement );
@@ -38,7 +32,6 @@ var engine = {
         this.centralObject = id;
     },
     addGround: function() {
-        //add ground
         var grassTex = THREE.ImageUtils.loadTexture('images/grass.png');
         grassTex.wrapS = THREE.RepeatWrapping;
         grassTex.wrapT = THREE.RepeatWrapping;
@@ -52,40 +45,6 @@ var engine = {
 //IMPORTANT, draw on both sides
         ground.doubleSided = true;
         this.addObject(ground);
-    },
-    addSky: function() {
-        //add skymap
-//load sky images
-        var urls = [
-            "images/sky1.png",
-            "images/sky1.png",
-            "images/sky1.png",
-            "images/sky1.png",
-            "images/sky1.png",
-            "images/sky1.png",
-        ];
-        var textureCube = THREE.ImageUtils.loadTextureCube(urls);
-        //setup the cube shader
-        var shader = THREE.ShaderLib["cube"];
-        var uniforms = THREE.UniformsUtils.clone(shader.uniforms);
-        uniforms['tCube'].texture = textureCube;
-        var material = new THREE.ShaderMaterial({
-            fragmentShader : shader.fragmentShader,
-            vertexShader   : shader.vertexShader,
-            uniforms       : uniforms
-        });
-        //create a skybox
-        var size = 10000;
-        var skyboxMesh = new THREE.Mesh(
-            new THREE.BoxGeometry(size,size,size),material);
-//IMPORTANT!! draw on the inside instead of outside
-        skyboxMesh.flipSided = true; // you must have this or you won't see anything
-        this.addObject(skyboxMesh);
-
-        //add sunlight
-        var light = new THREE.SpotLight();
-        light.position.set(0,500,0);
-        this.addObject(light);
     },
     render: function() {
         requestAnimationFrame( this.render.bind(engine) );
@@ -108,7 +67,7 @@ var engine = {
     },
     addObject: function(obj) {
         this.scene.add( obj );
-        this.camera.position.z = 50;
+        this.camera.position.z = this.settings.CAMERA_DISTANCE;
         return this.getLatestObject();
     },
     getObject: function(id) {

@@ -1,0 +1,31 @@
+{
+  "name": "webgl",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jkrobles/Phase-Shift",
+  "authors": [
+    "Justice <justice@mousebit.com>"
+  ],
+  "description": "Game engine using THREE.js",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "webgl",
+    "three.js",
+    "game",
+    "engine"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "threejs": "*"
+  }
+}
