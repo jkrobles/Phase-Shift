@@ -2,9 +2,6 @@ install: true
 git:
   submodules: false
 language: node_js
- node_js:
-   - "0.4"
-   - "0.6"
 before_install:
    - sudo apt-get update -qq
    - sudo apt-get install -qq npm
