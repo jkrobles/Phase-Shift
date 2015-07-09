@@ -13,31 +13,43 @@
         <script src="js/engine.js"></script>
 		<script>
             // Setup
-			engine.init();
-			var box = engine.addBox(0x00ff00);
-			var axis = engine.addAxis();
+	    engine.init();
+	    var box = engine.addBox(0x00ff00);
+	    var axis = engine.addAxis();
             var boxId = engine.getObjectId(box);
             engine.setCentralObject(boxId);
-            var person = engine.addPerson();
-			engine.render();
+            //var person = engine.addPerson();
+	    engine.render();
 
             // Add key events
             engine.addKeyEvent(engine.keys.LEFT_KEY,function(){
-                if ((box.position.x -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
-                    box.position.x -= engine.settings.MOVE_SIZE;
+		  if ((engine.getCameraPositionX() -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
+			engine.setCameraPosition(engine.getCameraPositionX()-10,engine.getCameraPositionY(),engine.getCameraPositionZ());
             });
             engine.addKeyEvent(engine.keys.RIGHT_KEY,function(){
-                if ((box.position.x +engine.settings.MOVE_SIZE) < engine.settings.HORIZONTAL_LIMIT)
-                    box.position.x += engine.settings.MOVE_SIZE;
+		 if ((engine.getCameraPositionX() -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
+                        engine.setCameraPosition(engine.getCameraPositionX()+10,engine.getCameraPositionY(),engine.getCameraPositionZ());
             });
             engine.addKeyEvent(engine.keys.UP_KEY,function(){
-                if ((box.position.y + engine.settings.MOVE_SIZE) < engine.settings.VERTICAL_LIMIT)
-                    box.position.y += engine.settings.MOVE_SIZE;
+		 if ((engine.getCameraPositionX() -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
+                        engine.setCameraPosition(engine.getCameraPositionX(),engine.getCameraPositionY(),engine.getCameraPositionZ()-10);
             });
             engine.addKeyEvent(engine.keys.DOWN_KEY,function(){
-                if ((box.position.y-engine.settings.MOVE_SIZE) >= 0)
-                    box.position.y -= engine.settings.MOVE_SIZE;
+		 if ((engine.getCameraPositionX() -engine.settings.MOVE_SIZE) > -engine.settings.HORIZONTAL_LIMIT)
+                        engine.setCameraPosition(engine.getCameraPositionX(),engine.getCameraPositionY(),engine.getCameraPositionZ()+10);
             });
+	    engine.addKeyEvent(engine.keys.SPACE_KEY,function() {
+		for (var i = 0;i < 10; i++) {
+			 setTimeout(function(){
+			engine.setCameraPosition(engine.getCameraPositionX(),engine.getCameraPositionY()+1,engine.getCameraPositionZ());
+			},700 + (i*10));
+		}
+		for (var c = 0;c < 10; c++) {
+                         setTimeout(function(){
+                        engine.setCameraPosition(engine.getCameraPositionX(),engine.getCameraPositionY()-1,engine.getCameraPositionZ());
+                        },500);
+                }
+	    });
             engine.initializeKeyEvents();
 
 		</script>

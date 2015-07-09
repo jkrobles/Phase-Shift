@@ -12,6 +12,8 @@ var engine = {
     },
     centralObject: '',
     keys: {
+	SPACE_KEY:32,
+	SHIFT_KEY:16,
         LEFT_KEY: 37,
         UP_KEY:38,
         RIGHT_KEY: 39,
@@ -85,6 +87,20 @@ var engine = {
     },
     addKeyEvent: function(keyCode, bindCallback) {
         this.keyEvents[keyCode] = bindCallback;
+    },
+    setCameraPosition(x,y,z) {
+	this.camera.position.x = x;
+	this.camera.position.y = y;
+	this.camera.position.z = z;
+    },
+    getCameraPositionX() {
+	return this.camera.position.x;
+    },
+    getCameraPositionY() {
+        return this.camera.position.y;
+    },
+    getCameraPositionZ() {
+        return this.camera.position.z;
     },
     initializeKeyEvents: function() {
         var keyEvents = this.keyEvents;
